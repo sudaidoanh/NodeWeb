@@ -1,0 +1,151 @@
+<form name="container-form" method="post" action="/people/handle-form-action" class="mt-4">
+  <div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+      <a href="/people/trash">Dữ liệu đã xóa 
+        {{#if deletedCount}}
+          ({{deletedCount}})
+        {{/if}}
+      <i class="fas fa-trash"></i>
+      </a>
+    </div>
+
+    <div class="col-12">
+      <div class="mt-4 d-flex align-items-center">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" value="" id="checkbox-all">
+          <label for="checkbox-all" class="form-check-label">Select all</label>
+        </div>
+
+         <select class="form-control form-control-sm ml-2 mr-2" style="width: 30%;" name="action" required="required">
+          <option value="">-- Choose option --</option>
+          <option value="delete">Delete</option>
+        </select>
+
+        <button class="btn btn-primary btn-sm btn-check-all-submit" id="btn-check-all-submits" disabled="true" >Perform</button>
+        {{{sortable 'name' _sort}}}
+      </div>
+    </div>
+
+    {{#each test}}
+
+    <div class="card" id="card-item">
+      <a href="/people/{{this.slug}}">
+          <img src="{{this.image}}" class="card-img-top" style="height: 318px;">
+      </a>
+      <div class="card-img-overlay">
+        <h4 class="card-title">STT: {{sum 1 1}}</h4>
+      </div>
+
+      <div class="card-body">
+        <a href="/people/{{this.slug}}">
+            <h5 class="card-title">{{this.name}}</h5>
+        </a>
+        
+        <p class="card-text">{{this.description}}</p>
+        
+        <div class="row align-items-center">
+          <div class="col-1">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" value="{{this.slug}}" name="peopleSlugs[]">
+              <label class="form-check-label"></label>
+            </div>
+          </div>
+          <div class="col-4">
+                <a href="/people/{{this.slug}}" class="btn btn-primary">Detail</a>
+            
+          </div>
+            
+          <div class="col-3">
+            <a href="/people/{{this.slug}}/edit" class="btn btn-primary">Edit</a>
+          </div>
+
+          <div class="col-3">
+            <a type="button" class="btn btn-primary" data-toggle="modal" data-slug="{{this.slug}}" data-target="#deleteModal">Delete</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {{else}}
+    <div class="col-12">
+      <p class="text-center">
+        Chưa tạo thông tin
+        <a href="/people/create">Thêm mới thông tin</a>
+      </p>
+    </div>
+
+    {{/each}}
+
+  </div>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Confirm Delete</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnDeleteInfoPeople" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form method="post" name="delete-form"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function (event) {
+    var slug;
+    var deleteForm = document.forms['delete-form'];
+    //var containerForm = document.forms['container-form'];
+    var containerForm = $('form[name="container-form"]');
+    var btnDeleteInfoPeople = document.getElementById('btnDeleteInfoPeople');
+    var checkboxAll = $('#checkbox-all');
+    var peopleItemCheckbox = $('input[name="peopleSlugs[]"]');
+    var btnCheckAllSubmit = $('.btn-check-all-submit')
+
+    $('#deleteModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      slug = button.data('slug');
+      
+    });
+
+    btnDeleteInfoPeople.onclick = function () {
+      deleteForm.action = '/people/' + slug + '?_method=DELETE';
+      deleteForm.submit();
+    }
+
+    checkboxAll.change(function() {
+      var isCheckedAll = $(this).prop('checked');
+      peopleItemCheckbox.prop('checked', isCheckedAll);
+      renderCheckAllSubmitBtn();
+    });
+
+    peopleItemCheckbox.change(function() {
+      var isCheckedAll = peopleItemCheckbox.length === $('input[name="peopleSlugs[]"]:checked').length;
+      checkboxAll.prop('checked', isCheckedAll);
+      renderCheckAllSubmitBtn();
+    });
+
+    function renderCheckAllSubmitBtn() {
+      var checkedCount =  $('input[name="peopleSlugs[]"]:checked').length;
+      if(checkedCount > 0) {
+        btnCheckAllSubmit.attr('disabled', false)
+      }
+      else {
+        btnCheckAllSubmit.addAttr('disabled', true);
+      }
+    }
+  });
+</script>

@@ -1,0 +1,34 @@
+<script src="/js/modules.js"></script>
+<form method="post" action="login">
+    <div class="form-group">
+        <label for="txtName">Username</label>
+        <input type="text" class="form-control" id="txtUser" name="txtUser" value="doanhsu" onblur="checkUser()">
+        <p><span id="checkedUser"></span></p>
+    </div>
+    <div class="form-group">
+        <label for="txtFName">First Name</label>
+        <input type="text" class="form-control" id="txtFName" name="txtFName" value="Doanh" onblur="checkFName()">
+        <p><span id="checkedFName"></span></p>
+    </div>
+    <div class="form-group">
+        <label for="txtLName">Last Name</label>
+        <input type="text" class="form-control" id="txtLName" name="txtLName" value="Su" onblur="checkLName()">
+        <p><span id="checkedLName"></span></p>
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">Email Dresss</label>
+        <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="sudaidoanh@gmail.com" onblur="checkEmail()">
+        <p><span id="checkedEmail"></span></p>
+    </div>
+    <div class="form-group">
+        <label for="txtPass">Password</label>
+        <input type="password" class="form-control" id="txtPass" name="txtPass" value="" onblur="checkPass()">
+        <p><span id="checkedPass"></span></p>
+    </div>
+    <div class="form-group">
+        <label for="txtCPass">Confirm Password</label>
+        <input type="password" class="form-control" id="txtCPass" name="txtCPass" value="" onblur="checkCPass()">
+        <p><span id="checkedCPass"></span></p>
+    </div> 
+    <button type="submit" id="submit" disabled="disabled" onpointermove="openButton()" class="btn btn-primary">Submit</button>
+</form>

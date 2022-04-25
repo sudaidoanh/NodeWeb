@@ -1,0 +1,62 @@
+<div class="banner header-text" >
+    <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+            <div class="text-content">
+                <h4>Best Offer</h4>
+                <h2>New Arrivals On Sale</h2>
+            </div>
+        </div>
+        <div class="banner-item-02">
+            <div class="text-content">
+                <h4>Flash Deals</h4>
+                <h2>Get your best products</h2>
+            </div>
+        </div>
+        <div class="banner-item-03">
+            <div class="text-content">
+                <h4>Last Minute</h4>
+                <h2>Grab last minute deals</h2>
+            </div>
+        </div>
+        <div class="banner-item-04">
+            <div class="text-content">
+                <h4>Ultimate Laptop</h4>
+                <h2>Bring you the best</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="latest-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2 style="text-transform: uppercase;">Khuyến mãi hot</h2>
+                    <a href="/products">Tất cả khuyến mãi <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            {{#each top5Discount}}
+            <div class="col-lg-3 col-md-3">
+                <div class="product-item" style="height: 300px;">
+                    <img src="{{this.image}}" alt="">
+                    <div class="down-content">  
+                    <a href="productDetail/{{this.slug}}">
+                            <h6>{{this.name}}</h6>
+                            <span>Chi tiết</span>
+                    </a>
+                    <h5>{{formatCurrency this.price}}VND</h5>
+                    <h4>{{formatCurrency (discount this.price this.discount)}} VND</h4>
+                    <a class="input" href="cart.php?action=add&id='.$id_product.'">Giỏ hàng</a>
+                    </div>
+                </div>
+            </div> 
+
+            {{/each}}
+        </div>
+
+
+
+    </div>
+</div>

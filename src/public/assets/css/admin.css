@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+#container {
+    position: relative;
+    margin: auto auto;
+    height: auto;
+    width: 76%;
+    background-color: gainsboro;
+}
+
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th {
+    padding: 8px 2px !important;
+    display: table-cell;
+    text-align: center !important;
+    vertical-align: top;
+}
+
+#banner {
+    float: left;
+    height: 150px;
+    width: 100%;
+    background-color: aquamarine;
+}
+
+#menu {
+    float: left;
+    height: 40px;
+    width: 100%;
+    background-color: blanchedalmond;
+    margin: 2px 0px;
+}
+
+#main {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+#mainleft {
+    float: left;
+    height: 470px;
+    width: 25%;
+    background-color: chartreuse;
+    margin-right: 2px;
+}
+
+#mainmain {
+    float: left;
+    height: 470px;
+    width: calc(75% - 2px);
+    background-color: deepskyblue;
+
+}
+
+#footer {
+    float: left;
+    height: 150px;
+    width: 100%;
+    background-color: darkgoldenrod;
+    margin-top: 2px;
+}

@@ -1,0 +1,147 @@
+<form name="container-form" method="post" action="/people/handle-form-action" class="mt-4">
+    <div class="row">
+      <div class="col-9"></div>
+      <div class="col-3">
+        <i class="fas fa-backward"></i>
+        <a href="/people/">Backward People 
+        </a>
+      </div>
+
+      <div class="col-12">
+        <div class="mt-4 d-flex align-items-center">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="" id="checkbox-all">
+            <label for="checkbox-all" class="form-check-label">Select all</label>
+          </div>
+
+          <select class="form-control form-control-sm ml-2 mr-2" style="width: 30%;" name="action" required="required">
+            <option value="">-- Choose option --</option>
+            <option value="restore">Restore</option>
+          </select>
+
+          <button class="btn btn-primary btn-sm btn-check-all-submit" id="btn-check-all-submits" disabled="true" >Perform</button>
+        </div>
+      </div>
+      {{#each test}}
+
+      <div class="card" id="card-item">
+          <a href="/people/{{this.slug}}">
+              <img src="{{this.image}}" class="card-img-top" style="height: 318px;">
+          </a>
+          <div class="card-body">
+              <a href="/people/{{this.slug}}">
+                  <h5 class="card-title">{{this.name}}</h5>
+              </a>
+              
+              <p class="card-text">{{this.description}}</p>
+              <div class="row align-items-center ">
+                <div class="col-2">
+                  <div class="form-check ml-3">
+                    <input type="checkbox" class="form-check-input" value="{{this.slug}}" name="peopleSlugs[]">
+                    <label class="form-check-label"></label>
+                  </div>
+                </div>
+                  
+                <div class="col-3">
+                  <a href=""  class="btn btn-light btn-restore" data-slug="{{this.slug}}">Restore</a>
+                </div>
+
+                <div class="col-7">
+                  <a type="button" class="btn btn-danger ml-3" data-toggle="modal" data-slug="{{this.slug}}" data-target="#deleteModal">Permanently Delete</a>
+                </div>
+              </div>
+
+          </div>
+      </div>
+
+      {{else}}
+      <div class="col-12">
+        <p class="text-center">
+          Thùng rác trống
+          <a href="/people">People</a>
+        </p>
+      </div>
+      {{/each}}
+
+    </div>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to Permanently Delete</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnDeleteInfoPeople" class="btn btn-danger">Permanently Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form method="post" name="delete-form"></form>
+<form method="post" name="restore-form"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function (event) {
+    var slug;
+    var deleteForm = document.forms['delete-form'];
+    var restoreForm = document.forms['restore-form'];
+    var containerForm = document.forms['container-form'];
+    var btnDeleteInfoPeople = document.getElementById('btnDeleteInfoPeople');
+    var btnRestore = $('.btn-restore')
+    var checkboxAll = $('#checkbox-all');
+    var peopleItemCheckbox = $('input[name="peopleSlugs[]"]');
+    var btnCheckAllSubmit = $('.btn-check-all-submit')
+
+    $('#deleteModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      slug = button.data('slug');
+      
+    });
+
+      
+
+    btnDeleteInfoPeople.onclick = function () {
+      deleteForm.action = '/people/' + slug + '/permanentlyDelete?_method=DELETE';
+      deleteForm.submit();
+    }
+
+    btnRestore.click(function(e) {
+      e.preventDefault();
+
+      var slug = $(this).data('slug'); 
+      restoreForm.action = '/people/' + slug + '/restore?_method=PATCH';
+      restoreForm.submit();
+    })
+    checkboxAll.change(function() {
+      var isCheckedAll = $(this).prop('checked');
+      peopleItemCheckbox.prop('checked', isCheckedAll);
+      renderCheckAllSubmitBtn();
+    });
+
+    peopleItemCheckbox.change(function() {
+      var isCheckedAll = peopleItemCheckbox.length === $('input[name="peopleSlugs[]"]:checked').length;
+      checkboxAll.prop('checked', isCheckedAll);
+      renderCheckAllSubmitBtn();
+    });
+
+    function renderCheckAllSubmitBtn() {
+      var checkedCount =  $('input[name="peopleSlugs[]"]:checked').length;
+      if(checkedCount > 0) {
+        btnCheckAllSubmit.attr('disabled',false);
+      }
+      else {
+        btnCheckAllSubmit.attr('disabled', true);
+      }
+    }
+  });
+</script>
