@@ -2,16 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const siteController = require('../app/controllers/SitesController');
+const  middleWare = require('../app/middlewares/AuthMiddle');
 
-
-router.get('/register', siteController.register);
-router.post('/login', siteController.login);
-router.get('/login', siteController.login);
+router.get('/', siteController.index);
+router.use('/',middleWare.auth);
 router.get('/products', siteController.products);
 
 router.get('/:company', siteController.productsAccordingToCompany);
 
 
-router.get('/', siteController.index);
 
 module.exports = router;

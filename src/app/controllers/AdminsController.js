@@ -9,7 +9,8 @@ class AdminsController{
         Promise.all([Companies.find({}), ])
             .then(([ companies ]) => 
                 res.render('admin/addNewAdmin', {
-                    companies: mutipleMongooseToObject(companies)
+                    companies: mutipleMongooseToObject(companies),
+                    layout: "adminLayouts"
                 }))
             .catch(next);    
      }   
@@ -18,7 +19,8 @@ class AdminsController{
         Promise.all([Companies.find({}), ])
         .then(([ companies ]) => 
             res.render('admin/addNewCompany', {
-                companies: mutipleMongooseToObject(companies)
+                companies: mutipleMongooseToObject(companies),
+                layout: "adminLayouts"
             }))
         .catch(next);    
  }   
@@ -29,7 +31,8 @@ class AdminsController{
             .then(([catelogy, companies ]) => 
                 res.render('admin/addProduct', {
                     catelogy,
-                    companies: mutipleMongooseToObject(companies)
+                    companies: mutipleMongooseToObject(companies),
+                    layout: "adminLayouts"
                 }))
             .catch(next);
     }
@@ -58,11 +61,13 @@ class AdminsController{
             .catch(next);
     }
 
-    manageProducts(req, res) {
-        Promise.all([Companies.find({}), ])
-        .then(([ companies ]) => 
+    manageProducts(req, res, next) {
+        Promise.all([Companies.find({}), Products.find({})])
+        .then(([ companies, products]) => 
             res.render('admin/manageProducts', {
-                companies: mutipleMongooseToObject(companies)
+                companies: mutipleMongooseToObject(companies),
+                products: mutipleMongooseToObject(products),
+                layout: 'adminLayouts',
             }))
         .catch(next);   
     }
@@ -72,7 +77,8 @@ class AdminsController{
         Promise.all([Companies.find({}), ])
         .then(([ companies ]) => 
             res.render('admin/mainPageAdmin', {
-                companies: mutipleMongooseToObject(companies)
+                companies: mutipleMongooseToObject(companies),
+                layout: 'adminLayouts'
             }))
         .catch(next);    
     }

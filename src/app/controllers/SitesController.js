@@ -4,13 +4,6 @@ const { mutipleMongooseToObject } = require('../../ulti/mongoose');
 
 class SitesController{
 
-    register(req, res, next) {
-
-    }
-
-    login(req, res, next) {
-
-    }
 
     products(req, res, next) {
         let productsQuery = Products.find({});

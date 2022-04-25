@@ -13,6 +13,21 @@ const route = require('./routes');
 
 const app = express();
 
+const sessions = require('express-session')
+const cookieParser = require("cookie-parser");
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+// cookie parser middleware
+app.use(cookieParser());
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({
