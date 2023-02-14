@@ -2,6 +2,7 @@ const Admin = require('../models/Admins');
 const Companies = require('../models/Companies');
 const Products = require('../models/Products');
 const { mutipleMongooseToObject } = require('../../ulti/mongoose');
+const { mongooseToObject  } = require('../../ulti/mongoose');
 
 class AdminsController{
 
@@ -23,7 +24,8 @@ class AdminsController{
                 layout: "adminLayouts"
             }))
         .catch(next);    
- }   
+    }   
+
     addProduct(req, res, next) {
         const products = Products.find({});
         var catelogyPrototype = Products.schema.path('catelogy').options.enum;
@@ -61,15 +63,87 @@ class AdminsController{
             .catch(next);
     }
 
-    manageProducts(req, res, next) {
-        Promise.all([Companies.find({}), Products.find({})])
-        .then(([ companies, products]) => 
-            res.render('admin/manageProducts', {
+    edit(req, res, next) {
+        // Products.findById(req.params.id)
+        Promise.all([Companies.find({}), Products.findOne( {slug: req.params.slug })])
+            .then(([companies, product]) => 
+            res.render('admin/editProduct', {
                 companies: mutipleMongooseToObject(companies),
-                products: mutipleMongooseToObject(products),
-                layout: 'adminLayouts',
+                product: mongooseToObject(product),
+                layout: 'adminLayouts'
             }))
-        .catch(next);   
+            .catch(next);
+    }
+
+    update(req, res, next) {
+        Products.updateOne({ slug: req.params.slug}, req.body)
+            .then(() => res.redirect(`/go-to-admin-page/manageProducts/${req.params.slug}`))
+            .catch(next);
+    }
+
+    delete(req, res, next) {
+        Products.delete({ slug: req.params.slug})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    permanentlyDelete(req, res, next) {
+        Products.deleteOne({ slug: req.params.slug})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    trash(req, res, next) {
+
+        Products.findDeleted({})
+            .then(products => {
+                res.render('admin/productTrash', {
+                    products: mutipleMongooseToObject(products),
+                    layout: 'adminLayouts'
+                });
+            })
+            .catch(next);
+    }
+
+    restore(req, res, next) {
+        Products.restore({ slug: req.params.slug})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    handleFormAction(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Products.delete({ slug:{ $in:  req.body.productSlugs }})
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;  
+            case 'restore':
+                Products.restore({ slug:{ $in:  req.body.productSlugs }})
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break; 
+            default:
+                res.render({ message: 'Action invalid'});
+        }
+    }
+
+    manageProducts(req, res, next) {
+        let productsQuery = Products.find({});
+
+        if(req.query.hasOwnProperty('_sort')) {
+            productsQuery = productsQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
+        Promise.all([Companies.find({}), productsQuery])
+            .then(([ companies, products]) => 
+                res.render('admin/manageProducts', {
+                    companies: mutipleMongooseToObject(companies),
+                    products: mutipleMongooseToObject(products),
+                    layout: 'adminLayouts',
+                }))
+            .catch(next);   
     }
 
     admin(req, res, next) {

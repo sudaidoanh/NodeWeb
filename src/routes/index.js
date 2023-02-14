@@ -1,6 +1,5 @@
 
 const siteRouter = require('./site');
-const peopleRouter = require('./people');
 const adminRouter = require('./admin');
 const middleware = require('./middleWare');
 

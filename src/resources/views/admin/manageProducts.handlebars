@@ -36,11 +36,11 @@
                     <input type="checkbox" value="" id="checkbox-all">
                     <label for="checkbox-all">STT</label>
                 </th>
-                <th width="160">Tên sản phẩm</th>
-                <th width="130">Giá</th>
-                <th width="90">Khuyến mãi</th>
-                <th width="210">Mô tả</th>
-                <th width="90">Tồn kho</th>
+                <th width="160">Tên sản phẩm {{{sortable 'name' _sort}}}</th>
+                <th width="130">Giá{{{sortable 'price' _sort}}}</th>
+                <th width="100">Giảm giá{{{sortable 'discount' _sort}}}</th>
+                <th width="200">Mô tả</th>
+                <th width="90">Tồn kho{{{sortable 'inventory' _sort}}}</th>
                 <th width="40">Sửa</th>
                 <th width="40">Xóa</th>
             </tr>
@@ -59,7 +59,7 @@
                     <td>{{this.inventory}}</td>
                     <td><a href="/go-to-admin-page/manageProducts/{{this.slug}}"><i class="fa fa-exchange" aria-hidden="true"></i></a></td>
                     <td>
-                        <a type="button" onclick="document.getElementById('deleteModal').style.display='block'" class="w3-button w3-small" data-slug="{{this.slug}}">
+                        <a a type="button" class="btn btn-danger" data-toggle="modal" data-slug="{{this.slug}}" data-target="#deleteModal">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
@@ -83,23 +83,26 @@
         <br>
     </div>
 
-    <div id="deleteModal" class="w3-modal">
-        <div class="w3-modal-content w3-animate-top w3-card-4">
-            <header class="w3-container w3-blue-grey"> 
-                <span onclick="document.getElementById('deleteModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h2>Confirm Delete</h2>
-            </header>
-            <div class="w3-container w3-light-grey">
-                <p>&nbsp;</p>
-                <h1 class="w3-center ">Bạn có chắc chắn muốn xóa?</h1>
-                <p>&nbsp;</p>
-            </div>
-            <footer class="w3-container w3-light-grey">
-                <button type="button" id="btnDeleteProduct" class="w3-btn w3-display-bottommiddle w3-round-xlarge w3-red" style="margin-bottom: 10px;">Delete</button>
-                <button type="button" class="w3-btn w3-round-xlarge w3-white w3-right" onclick="document.getElementById('deleteModal').style.display='none'" style="margin-bottom: 10px;">Close</button>
-            </footer>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Confirm Delete</p> 
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnDeleteProduct" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
         </div>
     </div>
+</div>
 
     <form method="post" name="delete-form"></form>
 
@@ -108,8 +111,7 @@
         document.addEventListener('DOMContentLoaded', function (event) {
             var slug;
             var deleteForm = document.forms['delete-form'];
-            //var containerForm = document.forms['container-form'];
-            var containerForm = $('form[name="container-form"]');
+            var containerForm = document.forms['container-form'];
             var btnDeleteProduct = document.getElementById('btnDeleteProduct');
             var checkboxAll = $('#checkbox-all');
             var productItemCheckbox = $('input[name="productSlugs[]"]');
