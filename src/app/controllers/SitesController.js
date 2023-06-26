@@ -92,14 +92,13 @@ class SitesController{
             });
             await userCart.save();
             
-            
-        }else{
+        } else {
             const products = userCart.products;
             var value = products.get(product.name);
-            if(value){
-                products.set(product.name,++value);
-            }else{
-                products.set(product.name,1);
+            if(value) {
+                products.set(product.name, ++value);
+            } else {
+                products.set(product.name, 1);
             }
             await userCart.save();
         }
