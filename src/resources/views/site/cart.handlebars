@@ -1,0 +1,82 @@
+<div class="container">
+            <div class="modal-header">
+                <h3 class="modal-title">Giỏ hàng</h3>
+                <h3 class="modal-title" style="margin-right: 0px;">
+                    Bạn có 0 sản phẩm trong giỏ hàng
+                </h3>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th class="col-1">STT</th>
+                            <th class="col-3">Sản phẩm</th>
+                            <th class="col-3">Tên sản phẩm</th>
+                            <th class="col-1">Số lượng</th>
+                            <th class="col-1">Giá tiền</th>
+                            <th class="col-2">Tổng cộng</th>
+                            <th class="col-1">Xóa</th>
+                        </tr>
+                    </thead>
+                        {{#eachInMap  products  }}
+                        <tr style="text-align: center;">
+                            <th>&nbsp;</th>
+                            <th>{{key}}</th>
+                            <th>&nbsp;</th>
+                            <th>{{value}}</th>
+                            <th>Giá tiền</th>
+                            <th>Tổng cộng</th>
+                            <th>Xóa
+                                {{!-- <form method="Delete" action="/cart/{{key}}">
+                                <input type="submit" name="value" value="xóa"/>
+                            </form> --}}
+                            </th>
+                            
+                        </tr>
+
+                        {{/eachInMap}}
+
+                 
+
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-info" value="Refresh" name="btnRefresh"></input>
+
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-4" style="text-align: center;">
+                        Nhập số điện thoại:    
+                    </div>
+
+                    <div class="col-8">
+                        <input type="text" name="txtDienthoai" style="width: 80%; margin-bottom : 20px">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4" style="text-align: center;">
+                        Nhập địa chỉ giao hàng:    
+                    </div>
+
+                    <div class="col-8">
+                        <input type="text"  name="txtDiachi" style="width: 80%; margin-bottom : 20px">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col">
+                        <input type="submit" class="btn btn-info" value="Thanh toán" name="btnSubmit"></input>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script>
+        const products = {{products}}
+        console.log(products)
+    </script>

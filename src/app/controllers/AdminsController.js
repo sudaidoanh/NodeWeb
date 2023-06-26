@@ -1,20 +1,10 @@
-const Admin = require('../models/Admins');
 const Companies = require('../models/Companies');
 const Products = require('../models/Products');
+const Users = require('../models/Users');
 const { mutipleMongooseToObject } = require('../../ulti/mongoose');
 const { mongooseToObject  } = require('../../ulti/mongoose');
 
 class AdminsController{
-
-    addNewAdmin(req, res, next) {
-        Promise.all([Companies.find({}), ])
-            .then(([ companies ]) => 
-                res.render('admin/addNewAdmin', {
-                    companies: mutipleMongooseToObject(companies),
-                    layout: "adminLayouts"
-                }))
-            .catch(next);    
-     }   
 
     addNewCompany(req, res, next) {
         Promise.all([Companies.find({}), ])
@@ -36,14 +26,6 @@ class AdminsController{
                     companies: mutipleMongooseToObject(companies),
                     layout: "adminLayouts"
                 }))
-            .catch(next);
-    }
-
-    saveNewAdmin(req, res, next) {
-        var formData = req.body;
-        const admin = new Admin(formData);
-        admin.save()
-            .then(() => res.redirect('/go-to-admin-page'))
             .catch(next);
     }
 
@@ -95,14 +77,17 @@ class AdminsController{
 
     trash(req, res, next) {
 
-        Products.findDeleted({})
-            .then(products => {
-                res.render('admin/productTrash', {
-                    products: mutipleMongooseToObject(products),
-                    layout: 'adminLayouts'
-                });
-            })
-            .catch(next);
+        Promise.all([Products.findDeleted({}), Products.countDocuments(), Products.countDocumentsDeleted(), Users.countDocuments()])
+        .then(([ products, countDocuments, countDocumentsDeleted, countUsers]) => 
+            res.render('admin/productTrash', {
+                products: mutipleMongooseToObject(products),
+                countDocuments, 
+                countDocumentsDeleted, 
+                countUsers,
+                layout: 'adminLayouts',
+            }))
+        .catch(next);   
+    
     }
 
     restore(req, res, next) {
@@ -136,11 +121,33 @@ class AdminsController{
                 [req.query.column]: req.query.type,
             });
         }
-        Promise.all([Companies.find({}), productsQuery])
-            .then(([ companies, products]) => 
+        Promise.all([ productsQuery, Products.countDocuments(), Products.countDocumentsDeleted(), Users.countDocuments()])
+            .then(([ products, countDocuments, countDocumentsDeleted, countUsers]) => 
                 res.render('admin/manageProducts', {
-                    companies: mutipleMongooseToObject(companies),
                     products: mutipleMongooseToObject(products),
+                    countDocuments, 
+                    countDocumentsDeleted, 
+                    countUsers,
+                    layout: 'adminLayouts',
+                }))
+            .catch(next);   
+    }
+
+    users(req, res, next) {
+        let usersQuery = Users.find({});
+
+        if(req.query.hasOwnProperty('_sort')) {
+            usersQuery = usersQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
+        Promise.all([ usersQuery, Users.countDocuments(), Products.countDocumentsDeleted(), Users.countDocuments()])
+            .then(([ users, countDocuments, countDocumentsDeleted, countUsers]) => 
+                res.render('admin/users', {
+                    users: mutipleMongooseToObject(users),
+                    countDocuments, 
+                    countDocumentsDeleted, 
+                    countUsers,
                     layout: 'adminLayouts',
                 }))
             .catch(next);   
@@ -148,11 +155,13 @@ class AdminsController{
 
     admin(req, res, next) {
 
-        Promise.all([Companies.find({}), ])
-        .then(([ companies ]) => 
+        Promise.all([Products.countDocuments(), Products.countDocumentsDeleted(), Users.countDocuments()])
+        .then(([ countDocuments, countDocumentsDeleted, countUsers]) => 
             res.render('admin/mainPageAdmin', {
-                companies: mutipleMongooseToObject(companies),
-                layout: 'adminLayouts'
+                countDocuments, 
+                countDocumentsDeleted, 
+                countUsers,
+                layout: 'adminLayouts',
             }))
         .catch(next);    
     }

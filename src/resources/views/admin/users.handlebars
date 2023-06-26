@@ -1,0 +1,144 @@
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <header class="w3-container" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> Dashboard</b></h5>
+    </header>
+
+    <div class="w3-container">
+                   
+        <h5>Người dùng
+        <form name="container-form" method="post" action="/go-to-admin-page/handle-form-action" class="mt-4">
+
+        <div class="w3-row">
+            <div class="w3-col s1">
+                &nbsp;
+            </div>
+
+           <div class="w3-col s4">
+                <select class="w3-select w3-center" style="width: 90%" name="action" required="required">
+                    <option disabled>-- Choose option --</option>
+                    <option value="delete">Delete</option>
+                </select>
+           </div>
+
+            <div class="w3-col s3">
+                <button class="w3-btn w3-btn-blue w3-btn-small btn-check-all-submit" id="btn-check-all-submits" disabled="true" >Perform</button>
+            </div>
+            
+        </div>
+
+        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr class="w3-hover-none">
+                <th width="45">
+                    <input type="checkbox" value="" id="checkbox-all">
+                    <label for="checkbox-all">STT</label>
+                </th>
+                <th width="160">Tên người dùng {{{sortable 'fullname' _sort}}}</th>
+                <th width="130">Tên đăng nhập{{{sortable 'username' _sort}}}</th>
+                <th width="90">Quyền{{{sortable 'inventory' _sort}}}</th>
+                <th width="40">Sửa</th>
+                <th width="40">Xóa</th>
+            </tr>
+
+            {{#each users}}
+                <tr>
+                    <td>
+                        <input id="{{this._id}}" type="checkbox" value="{{this._id}}" name="productSlugs[]">
+                        <label for="{{this._id}}"></label>
+                    </td>
+                    <td>{{this.fullname}}</td>
+                    <td>{{this.username}}</td>
+                    <td>{{this.role}}</td>
+                    <td><a href="/go-to-admin-page/users/{{this.username}}"><i class="fa fa-exchange" aria-hidden="true"></i></a></td>
+                    <td>
+                        <a a type="button" class="btn btn-danger" data-toggle="modal" data-slug="{{this.slug}}" data-target="#deleteModal">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td></td>
+                    <td><p>Updating data...</p></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {{/each}}
+
+        </table>
+        </form>
+
+        <br>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Confirm Delete</p> 
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnDeleteProduct" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+    <form method="post" name="delete-form"></form>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function (event) {
+            var slug;
+            var deleteForm = document.forms['delete-form'];
+            var containerForm = document.forms['container-form'];
+            var btnDeleteProduct = document.getElementById('btnDeleteProduct');
+            var checkboxAll = $('#checkbox-all');
+            var productItemCheckbox = $('input[name="productSlugs[]"]');
+            var btnCheckAllSubmit = $('.btn-check-all-submit')
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                slug = button.data('slug');
+                
+            });
+
+            btnDeleteProduct.onclick = function () {
+                deleteForm.action = '/go-to-admin-page/manageProducts/' + slug + '?_method=DELETE';
+                deleteForm.submit();
+            }
+
+            checkboxAll.change(function() {
+                var isCheckedAll = $(this).prop('checked');
+                productItemCheckbox.prop('checked', isCheckedAll);
+                renderCheckAllSubmitBtn();
+            });
+
+            productItemCheckbox.change(function() {
+                var isCheckedAll = productItemCheckbox.length === $('input[name="productSlugs[]"]:checked').length;
+                checkboxAll.prop('checked', isCheckedAll);
+                renderCheckAllSubmitBtn();
+            });
+
+            function renderCheckAllSubmitBtn() {
+                var checkedCount =  $('input[name="productSlugs[]"]:checked').length;
+                if(checkedCount > 0) {
+                    btnCheckAllSubmit.attr('disabled', false)
+                }
+                else {
+                    btnCheckAllSubmit.addAttr('disabled', true);
+                }
+            }
+        });
+    </script>

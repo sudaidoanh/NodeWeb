@@ -4,10 +4,12 @@
             <a class="navbar-brand" href="/">
                 <h2>Ultimate <em>Laptop</em></h2>
             </a>
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -22,18 +24,26 @@
                         <a class="nav-link" href="/about">Về chúng tôi</a>
                     </li>
                     <li class="nav-item">
-
-                        {{!-- <a class="nav-link" href="/login">Login</a> --}}
-                        {{!-- Nếu đã đăng nhập thì hiện:  --}}
+                        
+                        {{#if session.userID}}
                         <div class=" dropdown">
-                            <a class="nav-link" href="" id="navbardrop" data-toggle="dropdown"> Admin &nbsp;
+                            <a class="nav-link" href="" id="navbardrop" data-toggle="dropdown">{{session.userID.username}} &nbsp;
                                 <i class="fa fa-align-justify"></i></a>
                             <div class="dropdown-menu">
-                                <a href="info" class="dropdown-item">Thông tin cá nhân</a>
-                                <a href="/change-password" class="dropdown-item">Đổi mật khẩu</a>
-                                <a href="/logout"  class="dropdown-item">Đăng xuất</a>
+                                <a href="/auth/info" class="dropdown-item">Thông tin cá nhân</a>
+                                <a href="/auth/change-password" class="dropdown-item">Đổi mật khẩu</a>
+                                {{#if session.userRole}}
+                                <a href="/go-to-admin-page"  class="dropdown-item">Manager</a>
+                                {{/if}}
+                                <a href="/auth/logout"  class="dropdown-item">Đăng xuất</a>
+
                             </div>
                         </div>
+
+                        {{else}} 
+                            <a class="nav-link" href="/auth/login">Login</a>
+
+                        {{/if}}
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="/cart"><span class=" badge badge-light">
@@ -64,9 +74,9 @@
                 <marquee behavior="" direction="Left" style="color: #f33f3f; font-weight: bold; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 20px; ">Bring you the best choice </marquee>
             </div>
 
-            <form action="products.php" method="request" class="form-inline">
-                <input type="text"  name="txtSearch" placeholder="Tìm kiếm" class="form-control mr-lg-2">
-                <button class="btn btn-success" type="submit" value="search">Search</button>
+            <form action="products/" method="get" class="form-inline">
+                <input type="text"  name="key" placeholder="Tìm kiếm" class="form-control mr-lg-2">
+                <button class="btn btn-success" type="submit">Search</button>
             </form>
         </div>
     </nav>

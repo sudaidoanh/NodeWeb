@@ -7,7 +7,6 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const order = new Schema({
     _id: { type: Number},
     idUser: { type: Number },
-    phone: { type: Number } ,
     total: { type: Number } ,
     deliveryAddress: { type: String } ,
     status: { type: String },

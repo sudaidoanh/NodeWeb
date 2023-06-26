@@ -26,8 +26,6 @@ app.use(sessions({
 // cookie parser middleware
 app.use(cookieParser());
 
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({
@@ -38,10 +36,8 @@ app.use(express.json());
 
 app.use(methodOverride('_method'));
 
-
 //custom middleware
 app.use(SortMidleware);
-
 
 app.engine('handlebars',
     engine({
@@ -69,6 +65,16 @@ app.engine('handlebars',
                         <span class="${icon}"></span>
                     </a>`;
             },
+            eachInMap (map, block) {
+                let output = '';
+              
+                for (const [ key, value ] of map) {
+                  output += block.fn({ key, value });
+                }
+              
+                return output;
+              }
+            ,
             sum:(a, b) => a + b,
             discount: (price, discount) => {
                 return price * (100 - discount) / 100;

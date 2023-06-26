@@ -3,7 +3,7 @@
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <a href="/" class="w3-bar-item w3-button w3-hover-blue w3-hover-text-light-grey">  Trang chủ</a>
-    <a href="/logout" class="w3-bar-item w3-btn w3-black w3-hover-blue w3-right">Đăng xuất</a>
+    <a href="/auth/logout" class="w3-bar-item w3-btn w3-black w3-hover-blue w3-right">Đăng xuất</a>
 </div>
 
 <!-- Sidebar/menu -->
@@ -18,10 +18,9 @@
             <div class="w3-dropdown-hover">
                 <button class="w3-button"><i class="fa fa-cog"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-border">
-                    <a href="/change-password" class="w3-bar-item w3-button">Change Password</a>
+                    <a href="/auth/change-password" class="w3-bar-item w3-button">Change Password</a>
                     <a href="/go-to-admin-page/addProduct" class="w3-bar-item w3-button">Thêm sản phẩm</a>
                     <a href="/go-to-admin-page/addNewCompany" class="w3-bar-item w3-button">Thêm công ty</a>
-                    <a href="/go-to-admin-page/addNewAdmin" class="w3-bar-item w3-button">Thêm quản trị viên</a>
                 </div>
             </div>
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
@@ -43,19 +42,19 @@
         <a href="/go-to-admin-page/manageProducts" class="w3-bar-item w3-button w3-padding">
             <i class="fa fa-paper-plane-o fa-fw"></i>  
                 Quản lý sản phẩm   
-            <span class="w3-badge w3-green w3-right">12</span> 
+            <span class="w3-badge w3-green w3-right">{{countDocuments}}</span> 
         </a>
 
-        <a href="" class="w3-bar-item w3-button w3-padding">
+        <a href="/go-to-admin-page/trash" class="w3-bar-item w3-button w3-padding">
             <i class="fa fa fa-trash fa-fw"></i>  
                 Thùng rác 
-            <span class="w3-badge w3-green w3-right">12</span> 
+            <span class="w3-badge w3-green w3-right">{{countDocumentsDeleted}}</span> 
         </a>
 
-        <a href="" class="w3-bar-item w3-button w3-padding">
+        <a href="/go-to-admin-page/users" class="w3-bar-item w3-button w3-padding">
             <i class="fa fa-user fa-fw"></i>  
                 Quản lý người dùng   
-            <span class="w3-badge w3-green w3-right">12</span> 
+            <span class="w3-badge w3-green w3-right">{{countUsers}}</span> 
         </a>
 
         <a href="" class="w3-bar-item w3-button w3-padding">

@@ -1,318 +1,312 @@
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-    <div class="container">
-        <div class="mt-4">
-            <form class="form-horizontal" method="post" action="storageProduct">
-                <fieldset>
+    <form class="w3-container w3-display-topmiddle w3-card-4 w3-light-grey w3-text-blue w3-margin" style="width: 60%" method="post" action="storageProduct">
 
-                    <!-- Form Name -->
-                    <legend class="text-center  ">PRODUCTS</legend>
+        <!-- Form Name -->
+        <legend class="w3-center" style="margin-top: 30px;">PRODUCTS</legend>
 
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="id">PRODUCT ID</label>
-                        <div class="col-md-4">
-                            <input id="id" name="id" placeholder="PRODUCT ID" class="form-control input-md"
-                                required="" type="text">
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="id">PRODUCT ID</label></div>
+            
+            <div class="w3-rest">
+                <input id="id" name="id" placeholder="PRODUCT ID" class="w3-input w3-text-blue"
+                    required="" type="text">
 
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="name">TÊN SẢN PHẨM</label>
-                        <div class="col-md-4">
-                            <input id="name" name="name" placeholder="PRODUCT NAME"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Select Basic -->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="company">HÃNG</label>
-                        <div class="col-md-4">
-                            <select id="company" name="company" class="form-control">
-                                {{#each companies}} 
-                                <option value="{{this.slug}}">{{this.name}}</option>
-
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Textarea -->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="description">MÔ TẢ SẢN PHẨM</label>
-                        <div class="col-md-4">
-                            <textarea class="form-control" id="description" name="description"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="image">IMAGE 1</label>
-                        <div class="col-md-4">
-                            <input id="image" name="image" placeholder="LINK IMAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="image2">IMAGE 2</label>
-                        <div class="col-md-4">
-                            <input id="image2" name="image2" placeholder="LINK IMAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="image3">IMAGE 3</label>
-                        <div class="col-md-4">
-                            <input id="image3" name="image3" placeholder="LINK IMAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="image4">IMAGE 4</label>
-                        <div class="col-md-4">
-                            <input id="image4" name="image4" placeholder="LINK IMAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="image5">IMAGE 5</label>
-                        <div class="col-md-4">
-                            <input id="image5" name="image5" placeholder="LINK IMAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Select Basic -->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="catelogy">LOẠI SẢN PHẨM</label>
-                        <div class="col-md-4">
-                            <select id="catelogy" name="catelogy" class="form-control">
-                                {{#each catelogy}} 
-                                <option value="{{this}}">{{this}}</option>
-
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="promotion">KHUYẾN MÃI</label>
-                        <div class="col-md-4">
-                            <input id="promotion" name="promotion" placeholder="PROMOTION"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-
-                    <!-- Number input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="discount">GIẢM GIÁ (%) </label>
-                        <div class="col-md-4">
-                            <input id="discount" name="discount" placeholder="DISCOUNT"
-                                class="form-control input-md" required="" type="number">
-                        </div>
-                    </div>
-
-                    <!-- Number input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="price">GIÁ (VNĐ) </label>
-                        <div class="col-md-4">
-                            <input id="price" name="price" placeholder="PRICE"
-                                class="form-control input-md" required="" type="number">
-                        </div>
-                    </div>
-
-                    <!-- Number input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="inventory">TỒN KHO</label>
-                        <div class="col-md-4">
-                            <input id="inventory" name="inventory" placeholder="INVENTORY"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="CPU">CPU</label>
-                        <div class="col-md-4">
-                            <input id="CPU" name="CPU" placeholder="CPU"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="RAM">RAM</label>
-                        <div class="col-md-4">
-                            <input id="RAM" name="RAM" placeholder="RAM"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="storage">BỘ NHỚ</label>
-                        <div class="col-md-4">
-                            <input id="storage" name="storage" placeholder="STORAGE"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="screen">MÀN HÌNH</label>
-                        <div class="col-md-4">
-                            <input id="screen" name="screen" placeholder="SCREEN" class="form-control input-md" required=""
-                                type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="graphicCard">CARD MÀN HÌNH</label>
-                        <div class="col-md-4">
-                            <input id="graphicCard" name="graphicCard" placeholder="PRAPHIC CARD"
-                                class="form-control input-md" required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="communicationPort">CỔNG GIAO TIẾP</label>
-                        <div class="col-md-4">
-                            <input id="communicationPort" name="communicationPort" placeholder="COMMUNICATION PORT" class="form-control input-md"
-                                required="" type="text">
-
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="WIFI">WIFI</label>
-                        <div class="col-md-4">
-                            <input id="WIFI" name="WIFI" placeholder="WIFI"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="bluetooth">BLUETOOTH</label>
-                        <div class="col-md-4">
-                            <input id="bluetooth" name="bluetooth" placeholder="BLUETOOTH"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="webcam">WEBCAM</label>
-                        <div class="col-md-4">
-                            <input id="webcam" name="webcam" placeholder="WEBCAM"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="OS">HỆ ĐIỀU HÀNH</label>
-                        <div class="col-md-4">
-                            <input id="OS" name="OS" placeholder="OS"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="batterry">PIN</label>
-                        <div class="col-md-4">
-                            <input id="batterry" name="batterry" placeholder="BATTERRY"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="weight">CÂN NẶNG</label>
-                        <div class="col-md-4">
-                            <input id="weight" name="weight" placeholder="WEIGHT"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>   
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="color">MÀU SẮC</label>
-                        <div class="col-md-4">
-                            <input id="color" name="color" placeholder="COLOR"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>         
-
-                    <!-- Text input-->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="witdh">KÍCH THƯỚC</label>
-                        <div class="col-md-4">
-                            <input id="witdh" name="witdh" placeholder="WITDH"
-                                class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                    <div class="form-group row">
-                        <div class="col-2"></div>
-                        <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
-                        <div class="col-md-4">
-                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+            </div>
         </div>
-    </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="name">TÊN SẢN PHẨM</label></div>
+            
+            <div class="w3-rest">
+                <input id="name" name="name" placeholder="PRODUCT NAME"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="company">HÃNG</label></div>
+            
+            <div class="w3-rest">
+                <select id="company" name="company" class="w3-input w3-text-blue">
+                    {{#each companies}} 
+                    <option value="{{this.slug}}">{{this.name}}</option>
+
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="description">MÔ TẢ SẢN PHẨM</label></div>
+            
+            <div class="w3-rest">
+                <textarea class="w3-input w3-text-blue" id="description" name="description"></textarea>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="image">IMAGE 1</label></div>
+            
+            <div class="w3-rest">
+                <input id="image" name="image" placeholder="LINK IMAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="image2">IMAGE 2</label></div>
+            
+            <div class="w3-rest">
+                <input id="image2" name="image2" placeholder="LINK IMAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="image3">IMAGE 3</label></div>
+            
+            <div class="w3-rest">
+                <input id="image3" name="image3" placeholder="LINK IMAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="image4">IMAGE 4</label></div>
+            
+            <div class="w3-rest">
+                <input id="image4" name="image4" placeholder="LINK IMAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="image5">IMAGE 5</label></div>
+            
+            <div class="w3-rest">
+                <input id="image5" name="image5" placeholder="LINK IMAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="catelogy">LOẠI SẢN PHẨM</label></div>
+            
+            <div class="w3-rest">
+                <select id="catelogy" name="catelogy" class="w3-input w3-text-blue">
+                    {{#each catelogy}} 
+                    <option value="{{this}}">{{this}}</option>
+
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="promotion">KHUYẾN MÃI</label></div>
+            
+            <div class="w3-rest">
+                <input id="promotion" name="promotion" placeholder="PROMOTION"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+
+        <!-- Number input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="discount">GIẢM GIÁ (%) </label></div>
+            
+            <div class="w3-rest">
+                <input id="discount" name="discount" placeholder="DISCOUNT"
+                    class="w3-input w3-text-blue" required="" type="number">
+            </div>
+        </div>
+
+        <!-- Number input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="price">GIÁ (VNĐ) </label></div>
+            
+            <div class="w3-rest">
+                <input id="price" name="price" placeholder="PRICE"
+                    class="w3-input w3-text-blue" required="" type="number">
+            </div>
+        </div>
+
+        <!-- Number input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="inventory">TỒN KHO</label></div>
+            
+            <div class="w3-rest">
+                <input id="inventory" name="inventory" placeholder="INVENTORY"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="CPU">CPU</label></div>
+            
+            <div class="w3-rest">
+                <input id="CPU" name="CPU" placeholder="CPU"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="RAM">RAM</label></div>
+            
+            <div class="w3-rest">
+                <input id="RAM" name="RAM" placeholder="RAM"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="storage">BỘ NHỚ</label></div>
+            
+            <div class="w3-rest">
+                <input id="storage" name="storage" placeholder="STORAGE"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="screen">MÀN HÌNH</label></div>
+            
+            <div class="w3-rest">
+                <input id="screen" name="screen" placeholder="SCREEN" class="w3-input w3-text-blue" required=""
+                    type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="graphicCard">CARD MÀN HÌNH</label></div>
+            
+            <div class="w3-rest">
+                <input id="graphicCard" name="graphicCard" placeholder="PRAPHIC CARD"
+                    class="w3-input w3-text-blue" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="communicationPort">CỔNG GIAO TIẾP</label></div>
+            
+            <div class="w3-rest">
+                <input id="communicationPort" name="communicationPort" placeholder="COMMUNICATION PORT" class="w3-input w3-text-blue"
+                    required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="WIFI">WIFI</label></div>
+            
+            <div class="w3-rest">
+                <input id="WIFI" name="WIFI" placeholder="WIFI"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="bluetooth">BLUETOOTH</label></div>
+            
+            <div class="w3-rest">
+                <input id="bluetooth" name="bluetooth" placeholder="BLUETOOTH"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="webcam">WEBCAM</label></div>
+            
+            <div class="w3-rest">
+                <input id="webcam" name="webcam" placeholder="WEBCAM"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="OS">HỆ ĐIỀU HÀNH</label></div>
+            
+            <div class="w3-rest">
+                <input id="OS" name="OS" placeholder="OS"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="batterry">PIN</label></div>
+            
+            <div class="w3-rest">
+                <input id="batterry" name="batterry" placeholder="BATTERRY"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="weight">CÂN NẶNG</label></div>
+            
+            <div class="w3-rest">
+                <input id="weight" name="weight" placeholder="WEIGHT"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>   
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="color">MÀU SẮC</label></div>
+            
+            <div class="w3-rest">
+                <input id="color" name="color" placeholder="COLOR"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>         
+
+        <!-- Text input-->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="witdh">KÍCH THƯỚC</label></div>
+            
+            <div class="w3-rest">
+                <input id="witdh" name="witdh" placeholder="WITDH"
+                    class="w3-input w3-text-blue" required="" type="text">
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-center" style="width: 30%; margin-top: 8px;"><label for="singlebutton">Single Button</label></div>
+            
+            <div class="w3-rest">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+            </div>
+        </div>
+    </form>

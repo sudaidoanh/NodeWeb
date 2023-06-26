@@ -184,3 +184,8 @@ $('.modal').on('shown.bs.modal', function (e) {
 $('.modal').on('hidden.bs.modal', function (e) {
     modal_lv--
 });
+
+$('.carousel').carousel({
+    interval: 2000,
+    pause: "hover"
+})
